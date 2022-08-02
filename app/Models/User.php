@@ -39,4 +39,11 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $url = 'https://ecogreenafrica.org/rcbackend/api/reset-password?token='.$token;
+
+        $this->notify(new \App\Notifications\ResetPasswordNotification($url));
+    }
 }
